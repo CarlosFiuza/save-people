@@ -6,24 +6,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency: deploy-group
     steps:
-      # 1. Checkout do código
       - uses: actions/checkout@v4
-
-      # 2. Configure o Fly.io CLI
-      - name: Install Fly.io CLI
-        run: curl -L https://fly.io/install.sh | sh
-
-      - name: Add fly bin to PATH
-        run: export PATH="$HOME/.fly/bin:$PATH"
-      
-      # 3. Autenticação no Fly.io
-      - name: Authenticate Fly.io
-        run: flyctl auth token --env FLY_API_TOKEN
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      # 4. Implante a API
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy API
         run: flyctl deploy --remote-only
         env:
