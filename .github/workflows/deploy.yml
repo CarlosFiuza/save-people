@@ -13,5 +13,6 @@ jobs:
       - name: Deploy API
         run: flyctl deploy --remote-only
         env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           APP_ENV: ${{ secrets.APP_ENV }}
