@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for save-people-api on 2025-08-07T23:43:51-03:00
+# fly.toml app configuration file generated for save-people-api on 2025-08-08T00:30:52-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,7 +9,7 @@ primary_region = 'gru'
 [build]
 
 [processes]
-  app = 'node ./dbsetup.js npm run start:prod'
+  app = 'npm run start:prod'
 
 [[mounts]]
   source = 'data'
