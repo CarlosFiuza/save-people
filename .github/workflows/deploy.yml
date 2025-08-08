@@ -13,6 +13,9 @@ jobs:
       # 2. Configure o Fly.io CLI
       - name: Install Fly.io CLI
         run: curl -L https://fly.io/install.sh | sh
+
+      - name: Add fly bin to PATH
+        run: export PATH="$HOME/.fly/bin:$PATH"
       
       # 3. Autenticação no Fly.io
       - name: Authenticate Fly.io
