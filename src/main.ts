@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import * as bcrypt from 'bcrypt'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -27,6 +28,6 @@ async function bootstrap() {
 
   await app.listen(3000);
 
-  // console.log(bcrypt.hashSync('admin123', 10))
+  console.log(bcrypt.hashSync('admin123', 10))
 }
 bootstrap();

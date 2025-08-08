@@ -5,18 +5,27 @@ import { PersonModule } from '@/modules/person/person.module';
 import { Address } from '@/modules/person/entities/address.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: '127.0.0.1',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'save_people_db',
-      entities: [Person, Address, User],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => {
+        const isCloud = config.get<string>('APP_ENV') === 'cloud';
+        return {
+          type: 'postgres',
+          url: config.get<string>('POSTGRES_URL'),
+          ssl: isCloud ? { rejectUnauthorized: false } : undefined,
+          entities: [Person, Address, User],
+          synchronize: true,
+        };
+      },
     }),
     PersonModule,
     AuthModule,
