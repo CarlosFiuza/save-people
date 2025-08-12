@@ -1,7 +1,7 @@
 import { Gender } from '@/common/enums/gender.enum';
 import { TransformCPF } from '@/common/transformers/transform-cpf.transform';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, IsEmail, IsDate, IsEnum } from 'class-validator';
+import { IsOptional, IsString, IsEmail, IsDate, IsEnum, IsDateString } from 'class-validator';
 
 export class UpdatePersonDto {
     @ApiPropertyOptional()
@@ -27,7 +27,7 @@ export class UpdatePersonDto {
 
     @ApiPropertyOptional()
     @IsOptional()
-    @IsDate()
+    @IsDateString()
     dateOfBirth?: Date;
 
     @ApiPropertyOptional()

@@ -4,6 +4,8 @@ import { Person } from '@/modules/person/entities/person.entity';
 import { Address } from '@/modules/person/entities/address.entity';
 import { User } from '@/modules/auth/entities/user.entity';
 import { InitDatabase } from '@/infra/orm/typeorm/migrations/1754628125102-init-database';
+import { AddUserIdToPerson } from '@/infra/orm/typeorm/migrations/1754952159784-add-userid-person';
+import { AddNaturalnessColumn } from '@/infra/orm/typeorm/migrations/1754962980124-add-naturalness-column';
 
 const configService = new ConfigService();
 const isCloud = configService.get<string>('APP_ENV') === 'cloud';
@@ -13,7 +15,7 @@ export default new DataSource({
   type: 'postgres',
   url: configService.get<string>('POSTGRES_URL'),
   migrationsRun: true,
-  migrations: [InitDatabase],
+  migrations: [InitDatabase, AddUserIdToPerson, AddNaturalnessColumn],
   entities: [Person, Address, User],
   synchronize: isCloud ? false : true,
 });

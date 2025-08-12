@@ -16,6 +16,8 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('Save People API')
     .setDescription('API para cadastro e consulta de pessoas')

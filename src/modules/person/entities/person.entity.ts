@@ -1,11 +1,15 @@
 import { Gender } from '@/common/enums/gender.enum';
+import { User } from '@/modules/auth/entities/user.entity';
 import { Address } from '@/modules/person/entities/address.entity';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToOne, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Person {
     @PrimaryGeneratedColumn('increment')
     id: number;
+
+    @ManyToOne(() => User, (user) => user.persons, { nullable: false })
+    userId: number;
 
     @Column({ type: 'varchar', length: 100 })
     name: string;
@@ -21,6 +25,9 @@ export class Person {
 
     @Column({ type: 'varchar', length: 100, nullable: true })
     nationality?: string;
+
+    @Column({ type: 'varchar', length: 100, nullable: true })
+    naturalness?: string;
 
     @Column({ type: 'varchar', length: 14, unique: true })
     cpf: string;
