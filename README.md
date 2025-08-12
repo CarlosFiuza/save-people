@@ -1,63 +1,34 @@
-# NestJS REST API
+# Desafio para Seleção Node + React Stefanini
+Este repositório contempla a solução backend desenvolvida em Node + typescript + Nest.js.
 
-This project is a RESTful API built with NestJS and TypeScript for managing person records. It allows for the following operations:
+Link para a documentação da API [Swagger](https://save-people-api.fly.dev/api).
 
-- **Cadastro**: Insert new person records.
-- **Alteração**: Update existing person records.
-- **Remoção**: Delete person records.
-- **Consulta**: Retrieve person records.
+Link para o repositório com o frontend ([https://github.com/CarlosFiuza/save-people](https://github.com/CarlosFiuza/save-people-web))
 
-## Features
+O desafio consiste em:
+Criar uma aplicação para o cadastro de pessoas, composta por um back-end em
+Node e um front-end em React. A aplicação deve seguir as especificações
+abaixo:
 
-- **Person Entity**: The API manages person records with the following fields:
-  - **Nome**: Required
-  - **Sexo**: Optional
-  - **E-mail**: Optional, validated if provided
-  - **Data de Nascimento**: Required, validated
-  - **Naturalidade**: Optional
-  - **Nacionalidade**: Optional
-  - **CPF**: Required, validated for correct format and uniqueness
-  - **Data de Cadastro**: Automatically stored
-  - **Data de Atualização**: Automatically stored
+## Back-end
+Desenvolver uma API REST em Typescript + Nestjs que
+permita as seguintes operações:
+  1. Cadastro: Inserir novos registros de pessoas.
+  2. Alteração: Atualizar informações de registros existentes.
+  3. Remoção: Excluir registros de pessoas.
+  4. Consulta: Buscar registros de pessoas.
+  5. Informações a serem cadastradas:
+  6. Nome: obrigatório
+  7. Sexo: opcional
+  8. E-mail: opcional, mas deve ser validado se preenchido
+  9. Data de Nascimento: obrigatória, deve ser validada
+  10. Naturalidade: opcional
+  11. Nacionalidade: opcional
+  12. CPF: obrigatório, deve ser validado (formato correto e unicidade)
 
-## Installation
+Observação: As datas de cadastro e atualização dos dados devem ser armazenadas.
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   ```
-
-2. Navigate to the project directory:
-   ```
-   cd nestjs-rest-api
-   ```
-
-3. Install the dependencies:
-   ```
-   npm install
-   ```
-
-## Running the Application
-
-To start the application, run the following command:
-```
-npm run start
-```
-
-The API will be available at `http://localhost:3000`.
-
-## API Endpoints
-
-- **POST /persons**: Create a new person record.
-- **GET /persons**: Retrieve all person records.
-- **GET /persons/:id**: Retrieve a specific person record by ID.
-- **PUT /persons/:id**: Update an existing person record by ID.
-- **DELETE /persons/:id**: Delete a person record by ID.
-
-## Validation
-
-The API includes validation for required fields and formats, ensuring data integrity.
-
-## License
-
-This project is licensed under the MIT License.
+## Front-end
+O front-end deve ser desenvolvido utilizando React 17 ou superior e deve
+proporcionar uma interface amigável para o usuário realizar as operações
+de cadastro, alteração, remoção e consulta.
