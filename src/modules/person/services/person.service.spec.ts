@@ -17,6 +17,10 @@ const personEntity = {
   updatedAt: new Date(),
 };
 
+const jwtUser = {
+  userId: 2
+};
+
 describe('PersonService', () => {
   let service: PersonService;
   let repo: Repository<Person>;
@@ -45,30 +49,30 @@ describe('PersonService', () => {
 
   it('should create a person', async () => {
     const dto = { ...personEntity };
-    expect(await service.create(dto)).toEqual(personEntity);
+    expect(await service.create(dto, jwtUser.userId)).toEqual(personEntity);
     expect(repo.create).toHaveBeenCalledWith(dto);
     expect(repo.save).toHaveBeenCalledWith(personEntity);
   });
 
   it('should return all persons', async () => {
-    expect(await service.findAll()).toEqual([personEntity]);
+    expect(await service.findAll({ page: 1, itemsPerPage: 1000, personName: '' }, jwtUser.userId)).toEqual([personEntity]);
     expect(repo.find).toHaveBeenCalled();
   });
 
   it('should return one person by id', async () => {
-    expect(await service.findOne(1)).toEqual(personEntity);
+    expect(await service.findOne(1, jwtUser.userId)).toEqual(personEntity);
     expect(repo.findOneBy).toHaveBeenCalledWith({ id: 1 });
   });
 
   it('should update a person', async () => {
     const dto = { name: 'Jane Doe' };
-    expect(await service.update(1, dto)).toEqual(personEntity);
+    expect(await service.update(1, dto, jwtUser.userId)).toEqual(personEntity);
     expect(repo.preload).toHaveBeenCalledWith({ id: 1, ...dto });
     expect(repo.save).toHaveBeenCalledWith(personEntity);
   });
 
   it('should remove a person', async () => {
-    await expect(service.remove(1)).resolves.toBeUndefined();
+    await expect(service.remove(1, jwtUser.userId)).resolves.toBeUndefined();
     expect(repo.delete).toHaveBeenCalledWith(1);
   });
 });
