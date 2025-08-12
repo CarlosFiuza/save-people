@@ -9,6 +9,7 @@ export class Person {
     id: number;
 
     @ManyToOne(() => User, (user) => user.persons, { nullable: false })
+    @JoinColumn({ name: 'userId' })
     userId: number;
 
     @Column({ type: 'varchar', length: 100 })
